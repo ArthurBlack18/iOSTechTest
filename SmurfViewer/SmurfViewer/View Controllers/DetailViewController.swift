@@ -10,6 +10,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
+    override open var shouldAutorotate: Bool { return false }
+    
     let detailImageView = UIImageView()
     let lblTitle = UILabel()
     let lblDescription = UILabel()
@@ -19,6 +22,8 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        forcePortrait()
         
         view.backgroundColor = .white
         view.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
@@ -78,4 +83,15 @@ class DetailViewController: UIViewController {
 
     
     
+}
+
+
+extension UIViewController {
+
+  func forcePortrait() {
+    UIView.setAnimationsEnabled(false)
+    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+    UIView.setAnimationsEnabled(true)
+  }
+
 }
